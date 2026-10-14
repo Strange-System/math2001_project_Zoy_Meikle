@@ -14,13 +14,17 @@ instance (n : Nat) : OfNat ℕ n where
 end ℕ
 
 
-def plus : ℕ → ℕ → ℕ 
+def plus : ℕ → ℕ → ℕ
   | ℕ.zero, n => n
   | ℕ.succ m, n => ℕ.succ ( plus m n )
 
-def times : ℕ → ℕ → ℕ 
+def times : ℕ → ℕ → ℕ
   | ℕ.zero, _ => ℕ.zero
   | ℕ.succ m, n => plus n ( times m n )
+
+def divisible : ℕ → ℕ → Prop
+  | ℕ.zero, ℕ.zero => False
+  | m, n => ∃ k : ℕ, times k n = m
 
 macro_rules
 | `($m + $n) => `(plus $m $n)
@@ -36,8 +40,7 @@ meta def unexpandTimes : Lean.PrettyPrinter.Unexpander
   | `($_ $a $b) => `($a * $b)
   | _ => throw ()
 
+#reduce (types := true) divisible 0 0
 
-
-
-
-
+example : divisible 4 2 := by
+  exact ⟨2, rfl⟩
