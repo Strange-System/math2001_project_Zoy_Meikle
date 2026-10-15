@@ -38,6 +38,23 @@ def less : ℕ → ℕ → Prop
 def greater : ℕ → ℕ → Prop
   | m, n => (greaterorequal m n) ∧ ¬(m = n)
 
+noncomputable def divide : ℕ → ℕ → Option ℕ
+  | ℕ.zero, ℕ.zero => none
+  | m, n => by
+      classical
+      exact if h : ∃ k : ℕ, times k n = m then
+        some (Classical.choose h)
+      else
+        none
+
+noncomputable def subtract : ℕ → ℕ → Option ℕ
+  | m, n => by
+      classical
+      exact if h : ∃ k : ℕ, plus k n = m then
+        some (Classical.choose h)
+      else
+        none
+
 macro_rules
 | `($m + $n) => `(plus $m $n)
 | `($m * $n) => `(times $m $n)
