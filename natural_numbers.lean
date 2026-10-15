@@ -26,6 +26,18 @@ def divisible : ℕ → ℕ → Prop
   | ℕ.zero, ℕ.zero => False
   | m, n => ∃ k : ℕ, times k n = m
 
+def lessorequal : ℕ → ℕ → Prop
+  | m, n => ∃ k : ℕ, plus k m = n
+
+def greaterorequal : ℕ → ℕ → Prop
+  | m, n => ∃ k : ℕ, plus k n = m
+
+def less : ℕ → ℕ → Prop
+  | m, n => (lessorequal m n) ∧ ¬(m = n)
+
+def greater : ℕ → ℕ → Prop
+  | m, n => (greaterorequal m n) ∧ ¬(m = n)
+
 macro_rules
 | `($m + $n) => `(plus $m $n)
 | `($m * $n) => `(times $m $n)
