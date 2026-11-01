@@ -1,7 +1,11 @@
 import natural_numbers
 
+/- These definitions should follow
+Definition 0.41 from the textbook. -/
+
+
 def is_even ( n : ℕ ) : Prop :=
-  n%2 = 0
+  divides 2 n
 
 def is_odd ( n : ℕ ) : Prop :=
-  n%2 = 1
+  ¬is_even n
