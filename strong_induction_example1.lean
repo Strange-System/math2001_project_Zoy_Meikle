@@ -13,33 +13,17 @@ example ( n : ℕ ) : f n + 1 = 2^n := by
   case ih n ih =>
     cases n
     case zero =>
-      unfold power
-      unfold f
-      rfl
+      decide
     case succ n =>
       unfold power
-      unfold f
       have a : f n + 1 = 2^n := by
         have b := ih n
         apply b
-        apply lt_succ
-      rewrite [<- a]
+        exact lt_succ n
+      rewrite [← a]
       rewrite [times_left_distrib]
+      rewrite [f]
       rewrite [show 2*1=2 by decide]
-      rewrite [<- plus_assoc]
+      rewrite [← plus_assoc]
       rewrite [show 1+1=2 by decide]
       rfl
-
-example ( n : ℕ ) : f n + 1 = 2^n := by
-  induction n
-  case zero =>
-    unfold f
-    unfold power
-    rfl
-  case succ n ih =>
-    unfold f
-    unfold power
-    rewrite [<- ih]
-    rewrite [<- plus_assoc]
-    rewrite [times_left_distrib]
-    rfl
