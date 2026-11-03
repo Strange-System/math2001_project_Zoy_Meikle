@@ -1,1 +1,2 @@
 leanprover/lean4:v4.34.1
+git diff --diff-filter=D --name-only origin/main HEAD
