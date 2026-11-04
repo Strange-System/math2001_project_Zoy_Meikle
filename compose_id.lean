@@ -2,4 +2,7 @@ import functions
 
 theorem compose_id { f : S → T }
 : f ∘ id = f := by
-  sorry
+  funext x
+  unfold compose
+  unfold id
+  rfl
