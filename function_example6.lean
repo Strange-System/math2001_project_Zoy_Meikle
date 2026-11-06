@@ -5,6 +5,7 @@ import zero_not_succ
 import lt_succ
 import zero_le
 import le_lt_is_lt
+open Classical
 
 def ℕ_pos := { n : ℕ // n > 0 }
 
@@ -16,18 +17,21 @@ private theorem plus_one_gt_zero ( n : ℕ )
 
 def f ( n : ℕ ) : ℕ_pos := ⟨ n + 1, plus_one_gt_zero n ⟩
 
-private theorem times_two_is_even ( n : ℕ )
-: ∃k : ℕ, 2 * n = 2 * k := by
-  sorry
+def evens ( n : ℕ ) : ℕ_evens := ⟨2 * n, ⟨n, rfl⟩⟩
 
-def evens ( n : ℕ ) : ℕ_evens := ⟨ 2 * n, times_two_is_even n ⟩
-
-/- def evens ( n : ℕ ) : ℕ_evens := by
+/--/
+def evens ( n : ℕ ) : ℕ_evens := by
   unfold ℕ_evens
-  sorry
+  apply Subtype.mk
+  case val =>
+    exact 2 * n
+  case property =>
+    apply Exists.intro n
+    rfl
 -/
 
-def f ( n : ℕ ) : ℕ_pos := by
+
+/- def f ( n : ℕ ) : ℕ_pos := by
   unfold ℕ_pos
   apply Subtype.mk
   case val =>
