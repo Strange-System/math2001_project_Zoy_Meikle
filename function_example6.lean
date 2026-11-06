@@ -5,21 +5,28 @@ import zero_not_succ
 import lt_succ
 import zero_le
 import le_lt_is_lt
+import le_trans
+import lt_is_le
 open Classical
 
 def ℕ_pos := { n : ℕ // n > 0 }
 
 def ℕ_evens := { n : ℕ // ∃k : ℕ, 2 * k = n}
 
-private theorem plus_one_gt_zero ( n : ℕ )
-: n + 1 > 0 := by
+theorem plus_one_gt_zero (n : ℕ)
+    : n + 1 > 0 := by
   induction n
   case zero =>
-    change 0 < 0 + 1
-    change 0 < 1
-    sorry
+    exact lt_succ 0
   case succ h ih =>
-    sorry
+    change 0 < (h + 1).succ
+    unfold lt at ih ⊢
+    constructor
+    case left =>
+      exact le_trans 0 (h + 1) (h + 1).succ
+        ih.left (lt_is_le (lt_succ (h + 1)))
+    case right =>
+      apply zero_not_succ
 
 def f ( n : ℕ ) : ℕ_pos := ⟨ n + 1, plus_one_gt_zero n ⟩
 
