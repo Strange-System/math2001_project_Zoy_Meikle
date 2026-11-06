@@ -8,11 +8,33 @@ import le_lt_is_lt
 
 def ℕ_pos := { n : ℕ // n > 0 }
 
-private theorem plus_one_gt_zero ( n : ℕ ) 
+def ℕ_evens := { n : ℕ // ∃k : ℕ, 2 * k = n}
+
+private theorem plus_one_gt_zero ( n : ℕ )
 : n + 1 > 0 := by
   sorry
 
-def f ( n : ℕ ) : ℕ_pos := sorry
+def f ( n : ℕ ) : ℕ_pos := ⟨ n + 1, plus_one_gt_zero n ⟩
+
+private theorem times_two_is_even ( n : ℕ )
+: ∃k : ℕ, 2 * n = 2 * k := by
+  sorry
+
+def evens ( n : ℕ ) : ℕ_evens := ⟨ 2 * n, times_two_is_even n ⟩
+
+/- def evens ( n : ℕ ) : ℕ_evens := by
+  unfold ℕ_evens
+  sorry
+-/
+
+def f ( n : ℕ ) : ℕ_pos := by
+  unfold ℕ_pos
+  apply Subtype.mk
+  case val =>
+    exact n + 1
+  case property =>
+    exact plus_one_gt_zero n
+-/
 
 private theorem f_surj : surjective f := by
   sorry
@@ -24,7 +46,7 @@ private theorem from_I_plus_from_I_in_J ( a b : I )
 : 2 ≤ a.val + b.val ∧ a.val + b.val ≤ 20 := by
   sorry
 
-def p ( a : I × I ) : J := sorry 
+def p ( a : I × I ) : J := sorry
 
 def g ( x : ℕ_pos ) : ℕ := x.val
 
@@ -36,6 +58,6 @@ private theorem h_eq_gf : h = g ∘ f := by
 private theorem g_inj : injective g := by
   sorry
 
-private example : ∃ (V:Type) ( p : ℕ → V ) ( i : V → ℕ ), 
+private example : ∃ (V:Type) ( p : ℕ → V ) ( i : V → ℕ ),
 i ∘ p = h ∧ surjective p ∧ injective i := by
   sorry
