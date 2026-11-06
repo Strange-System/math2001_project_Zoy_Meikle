@@ -13,7 +13,13 @@ def ℕ_evens := { n : ℕ // ∃k : ℕ, 2 * k = n}
 
 private theorem plus_one_gt_zero ( n : ℕ )
 : n + 1 > 0 := by
-  sorry
+  induction n
+  case zero =>
+    change 0 < 0 + 1
+    change 0 < 1
+    sorry
+  case succ h ih =>
+    sorry
 
 def f ( n : ℕ ) : ℕ_pos := ⟨ n + 1, plus_one_gt_zero n ⟩
 
