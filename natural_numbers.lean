@@ -15,17 +15,17 @@ instance (n : Nat) : OfNat ℕ n where
 end ℕ
 
 
-def plus : ℕ → ℕ → ℕ 
+def plus : ℕ → ℕ → ℕ
   | ℕ.zero, n => n
   | ℕ.succ m, n => ℕ.succ ( plus m n )
 
-def times : ℕ → ℕ → ℕ 
+def times : ℕ → ℕ → ℕ
   | ℕ.zero, _ => ℕ.zero
   | ℕ.succ m, n => plus n ( times m n )
-  
+
 def power : ℕ → ℕ → ℕ
   | _, ℕ.zero => 1
-  | n, ℕ.succ m => times n ( power n m ) 
+  | n, ℕ.succ m => times n ( power n m )
 
 macro_rules
 | `($m + $n) => `(plus $m $n)
@@ -100,7 +100,7 @@ macro_rules
 
 def remainder : ℕ → ℕ → ℕ
 | 0, _ => 0
-| ℕ.succ n, m => 
+| ℕ.succ n, m =>
   let r := (remainder n m).succ
   if r = m then 0 else r
 
@@ -112,8 +112,8 @@ meta def unexpandRemainder : Lean.PrettyPrinter.Unexpander
   | `($_ $n $m) => `($n % $m)
   | _ => throw ()
 
-    
- /- Sums and products -/ 
+
+ /- Sums and products -/
 
 def sum ( f : ℕ → ℕ )  : ℕ → ℕ
 | 0 => 0
@@ -128,8 +128,4 @@ def prod ( f : ℕ → ℕ )  : ℕ → ℕ
 def irreducible ( n : ℕ ) : Prop :=
   (n ≠ 1) ∧ ∀ (a b : ℕ), a * b = n → a = 1 ∨ b = 1
 
-
-
-
 def ℕ_pos := { n : ℕ // n > 0 }
-
