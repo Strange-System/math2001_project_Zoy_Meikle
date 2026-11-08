@@ -16,7 +16,7 @@ infixl:65 " ∸ " => natsubtract
 /- accomplished with the shortcut \ .-
 -/
 infixl:70 " ⌊/⌋ " => floordiv
-/- accomplished with \ lfoor, then /, then \ rfloor
+/- accomplished with \ lfloor, then /, then \ rfloor
 -/
 
 def natdiv : ℕ → ℕ → (ℕ × ℕ)
