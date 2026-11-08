@@ -9,7 +9,7 @@ import le_trans
 import lt_is_le
 open Classical
 
-def ℕ_pos := { n : ℕ // n > 0 }
+#print ℕ_pos
 
 def ℕ_evens := { n : ℕ // ∃k : ℕ, 2 * k = n}
 
