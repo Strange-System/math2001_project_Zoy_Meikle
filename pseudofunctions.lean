@@ -13,4 +13,23 @@ def natsubtract : ℕ → ℕ → ℕ
 | ℕ.succ n, ℕ.zero => n.succ
 
 infixl:65 " ∸ " => natsubtract
-infixl:70 " ÷ " => floordiv
+/- accomplished with the shortcut \ .-
+-/
+infixl:70 " ⌊/⌋ " => floordiv
+/- accomplished with \ lfoor, then /, then \ rfloor
+-/
+
+def natdiv : ℕ → ℕ → (ℕ × ℕ)
+| n, m => (floordiv n m, remainder n m)
+
+infixl:70 " ÷ " => natdiv
+/- accomplished with \ div
+-/
+
+#eval 5 ∸ 3
+#eval 5 ∸ 5
+#eval 5 ∸ 6
+
+#eval 5 ⌊/⌋ 3
+#eval 5 % 3
+#eval 5 ÷ 3
